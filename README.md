@@ -1,4 +1,4 @@
-# todo
+# skills
 
 ## Project setup
 ```
