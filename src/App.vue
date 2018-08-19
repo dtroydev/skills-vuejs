@@ -30,8 +30,34 @@ body,
 html {
   margin: 0;
   height: 100%;
+  overflow-x: hidden;
 }
-#app {
-  width: 50%;
+
+@media (min-width: 0px) {
+  #app {
+    font-size: 0.7em;
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px) {
+  #app {
+    font-size: 0.8em;
+    width: 70%;
+  }
+}
+
+@media (min-width: 992px) {
+  #app {
+    font-size: 0.9em;
+    width: 60%;
+  }
+}
+
+@media (min-width: 1200px) {
+  #app {
+    font-size: 1em;
+    width: 50%;
+  }
 }
 </style>

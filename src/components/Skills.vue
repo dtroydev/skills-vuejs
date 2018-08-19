@@ -1,9 +1,22 @@
 <template>
   <div class="holder">
-    <input type="text" placeholder="Enter a skill you have..." v-model="skill" />
+
+    <form @submit.prevent="addSkill">
+      <input name="skill" v-validate="'min:5'" type="text" placeholder="Enter a skill you have..." v-model="skill" autofocus/>
+      <transition name="bounce">
+        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill')}}</p>
+      </transition>
+    </form>
+
     <ul>
-      <li v-for="(data, index) in skills" :key="index">{{data.skill}}</li>
+      <transition-group appear enter-active-class="animated zoomInUp" leave-active-class="animated zoomOutDown" asfsadfsdf>
+        <li v-for="(data, index) in skills" :key="index">
+          <b-button @click="deleteSkill(index)" variant="danger">Delete</b-button>
+          {{data.skill}}
+        </li>
+      </transition-group>
     </ul>
+
     <p>The above are the skills that you possess </p>
   </div>
 </template>
@@ -11,9 +24,7 @@
 <script>
 export default {
   name: 'Skills',
-  props: {
-    msg: String,
-  },
+  props: {},
   data() {
     return {
       skill: '',
@@ -25,30 +36,33 @@ export default {
     };
   },
   methods: {
-    // handlers
-    toggleAlert() {
-      this.showAlert = !this.showAlert;
+    addSkill() {
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.skills.push({ skill: this.skill });
+          this.skill = '';
+        }
+      });
+    },
+    deleteSkill(index) {
+      console.log(index);
+      this.skills.splice(index, 1);
     },
   },
-  computed: {
-    // getters
-    alert() {
-      return {
-        alert: true,
-        alertActive: this.showAlert,
-      };
-    },
-  },
+  computed: {},
 };
 </script>
 
 <style scoped>
 .holder {
   background: #fff;
+  position: relative;
 }
 
 .holder > *:not(ul),
-ul li {
+ul li,
+.alert,
+b-button {
   box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
@@ -74,15 +88,47 @@ ul li {
 p {
   padding: 1em;
   font-size: 1.3em;
-  text-align: center;
   margin: 0;
   padding: 1.3em;
   color: gray;
-  font-weight: 500;
+  font-weight: 300;
 }
 
-.container {
+/* .container {
   box-shadow: 0px 0px 40px lightgray;
+} */
+
+.alert {
+  z-index: 2;
+  position: absolute;
+  color: red;
+  background-color: yellow;
+  font-weight: bold;
+  padding: 0.1em 1.15em;
+  margin-top: -1em;
+  margin-left: 5px;
+  width: calc(100% - 10px);
+}
+
+.bounce-enter-active {
+  animation: bounce 0.5s;
+}
+
+.bounce-leave-active {
+  transform: scale(0);
+  transition: transform 0.5s;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 ::placeholder {
@@ -99,5 +145,9 @@ input {
   background-color: #666;
   color: white;
   width: 100%;
+}
+
+li button {
+  float: right;
 }
 </style>
