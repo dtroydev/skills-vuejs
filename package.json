@@ -17,23 +17,22 @@
     "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
     "parserOptions": {
-      "parser": "babel-eslint"
+      "sourceType": "module"
     }
   },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
     }
+  },
+  "cssnano": {
+    "preset": [
+      "default",
+      {
+        "mergeLonghand": false
+      }
+    ]
   },
   "browserslist": [
     "> 1%",

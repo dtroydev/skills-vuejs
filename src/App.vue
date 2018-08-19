@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Skills msg="Welcome to Your Vue.js App" />
+    <Skills/>
   </div>
 </template>
 
 <script>
-import Skills from "./components/Skills.vue";
+import Skills from './components/Skills.vue';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
-    Skills
-  }
+    Skills,
+  },
 };
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700");
+
+body {
+  background-color: #eeeeee;
+  font-family: "Quicksand", sans-serif;
+  display: grid;
+  grid-template-rows: auto;
+  justify-items: center;
+  align-items: center;
+}
+body,
+html {
+  margin: 0;
+  height: 100%;
+}
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 50%;
 }
 </style>
