@@ -11,7 +11,8 @@
     <ul>
       <transition-group appear enter-active-class="animated zoomInUp" leave-active-class="animated zoomOutDown" asfsadfsdf>
         <li v-for="(data, index) in skills" :key="index">
-          <b-button @click="deleteSkill(index)" variant="danger">Delete</b-button>
+          <!-- <b-button @click="deleteSkill(index)" variant="danger">Delete</b-button> -->
+          <i class="fa fa-minus-circle fa-2x" @click="deleteSkill(index)"></i>
           {{data.skill}}
         </li>
       </transition-group>
@@ -45,7 +46,6 @@ export default {
       });
     },
     deleteSkill(index) {
-      console.log(index);
       this.skills.splice(index, 1);
     },
   },
@@ -147,7 +147,19 @@ input {
   width: 100%;
 }
 
-li button {
+li button,
+li i {
   float: right;
+}
+
+li i {
+  cursor: pointer;
+  color: red;
+  width: 1em;
+  height: 1em;
+}
+
+li i:active {
+  color: darkred;
 }
 </style>
